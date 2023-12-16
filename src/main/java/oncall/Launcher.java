@@ -10,9 +10,7 @@ public class Launcher {
 
     public static void run() {
         MonthDayDTO monthDayDTO = InputController.inputMonthDay();
-        System.out.println(monthDayDTO);
 
         EmergencyDudyDTOs emergencyDudyDTOs = InputController.inputNames();
-        System.out.println(emergencyDudyDTOs);
     }
 }

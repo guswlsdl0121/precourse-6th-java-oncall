@@ -18,8 +18,7 @@ public class NamesInputProcessor {
         OutputView.printRequestHolidayRequest();
         EmergencyDutyDTO holiDayDTO = InputView.readHoliDayNames();
 
-        NamesValidator.validate(weekDayDTO);
-        NamesValidator.validate(holiDayDTO);
+        NamesValidator.validate(weekDayDTO, holiDayDTO);
 
         return new EmergencyDudyDTOs(List.of(weekDayDTO, holiDayDTO));
     }
