@@ -1,6 +1,8 @@
 package oncall;
 
+import oncall.controller.AssignDutyController;
 import oncall.controller.InputController;
+import oncall.domain.EmergencyDutyRepository;
 import oncall.domain.EmergencyDutyScheduler;
 import oncall.dto.EmergencyDudyDTOs;
 import oncall.dto.MonthDayDTO;
@@ -16,6 +18,10 @@ public class Launcher {
         EmergencyDudyDTOs emergencyDudyDTOs = InputController.inputNames();
 
         Days monthDays = EmergencyDutyScheduler.generateDutyDates(monthDayDTO);
-        System.out.println(monthDays);
+
+        AssignDutyController assignDutyController = new AssignDutyController(emergencyDudyDTOs);
+        assignDutyController.assign(monthDays);
+
+        System.out.println(EmergencyDutyRepository.getInstance().getAssignedDuties());
     }
 }
