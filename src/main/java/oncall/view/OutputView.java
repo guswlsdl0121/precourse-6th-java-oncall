@@ -38,7 +38,7 @@ public class OutputView {
                 .collect(Collectors.toMap(EmergencyDuty::date, EmergencyDuty::crewName));
 
         for (Day day : monthDays.days()) {
-            String dutyInfo = OutputViewFormatter.formatDay(day) + " " + dutyMap.get(day.date());
+            String dutyInfo = OutputViewFormatter.formatDay(day) + dutyMap.get(day.date());
             System.out.println(dutyInfo);
         }
     }
