@@ -35,18 +35,28 @@ public class EmergencyDutyScheduler {
         int daysInMonth = DAYS_IN_MONTH[month - MONTH_OFFSET];
         List<Day> days = new ArrayList<>();
 
+        populateDutyDays(days, month, daysInMonth, startDay);
+
+        return new Days(days);
+    }
+
+    private static void populateDutyDays(List<Day> days, int month, int daysInMonth, DayOfWeek startDay) {
         int dayOfWeekIndex = startDay.getValue();
         for (int day = 1; day <= daysInMonth; day++) {
             LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, day);
-            MonthDay monthDay = MonthDay.of(month, day);
-
-            boolean isHoliday = holidays.contains(monthDay) || isWeekend(DayOfWeek.of(dayOfWeekIndex));
+            boolean isHoliday = isHolidayOrWeekend(month, day, dayOfWeekIndex);
             days.add(new Day(date, isHoliday));
-
-            dayOfWeekIndex = dayOfWeekIndex % DAYS_IN_WEEK + MONTH_OFFSET;
+            dayOfWeekIndex = updateDayOfWeekIndex(dayOfWeekIndex);
         }
+    }
 
-        return new Days(days);
+    private static boolean isHolidayOrWeekend(int month, int day, int dayOfWeekIndex) {
+        MonthDay monthDay = MonthDay.of(month, day);
+        return holidays.contains(monthDay) || isWeekend(DayOfWeek.of(dayOfWeekIndex));
+    }
+
+    private static int updateDayOfWeekIndex(int dayOfWeekIndex) {
+        return dayOfWeekIndex % DAYS_IN_WEEK + MONTH_OFFSET;
     }
 
     private static boolean isWeekend(DayOfWeek dayOfWeek) {
