@@ -16,4 +16,12 @@ public class OutputView {
     public static void printRequestMonthDay() {
         System.out.println(ConsoleMessage.REQUEST_MONTH_DAY);
     }
+
+    public static void printRequestWeekDayRequest() {
+        System.out.println(ConsoleMessage.REQUEST_WEEK_DAY);
+    }
+
+    public static void printRequestHolidayRequest() {
+        System.out.println(ConsoleMessage.REQUEST_HOLI_DAY);
+    }
 }
