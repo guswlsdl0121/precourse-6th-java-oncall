@@ -14,6 +14,9 @@ public class EmergencyDutyScheduler {
     private static final int[] DAYS_IN_MONTH = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static final List<MonthDay> holidays = new ArrayList<MonthDay>();
 
+    private static final int DAYS_IN_WEEK = 7;
+    private static final int MONTH_OFFSET = 1;
+
     static {
         holidays.add(MonthDay.of(1, 1));
         holidays.add(MonthDay.of(3, 1));   // 삼일절
@@ -29,7 +32,7 @@ public class EmergencyDutyScheduler {
         int month = monthDayDTO.month();
         DayOfWeek startDay = monthDayDTO.day();
 
-        int daysInMonth = DAYS_IN_MONTH[month - 1];
+        int daysInMonth = DAYS_IN_MONTH[month - MONTH_OFFSET];
         List<Day> days = new ArrayList<>();
 
         int dayOfWeekIndex = startDay.getValue();
@@ -40,7 +43,7 @@ public class EmergencyDutyScheduler {
             boolean isHoliday = holidays.contains(monthDay) || isWeekend(DayOfWeek.of(dayOfWeekIndex));
             days.add(new Day(date, isHoliday));
 
-            dayOfWeekIndex = dayOfWeekIndex % 7 + 1;
+            dayOfWeekIndex = dayOfWeekIndex % DAYS_IN_WEEK + MONTH_OFFSET;
         }
 
         return new Days(days);
