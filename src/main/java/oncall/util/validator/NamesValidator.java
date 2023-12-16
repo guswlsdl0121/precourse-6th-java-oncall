@@ -18,7 +18,8 @@ public class NamesValidator {
         validateMinMembers(weekDayDTO);
         validateMinMembers(holiDayDTO);
 
-        validateMaxTotalMembers(weekDayDTO, holiDayDTO);
+        validateWeekdayMembers(weekDayDTO);
+        validateMaxHolidayMembers(holiDayDTO);
 
         validateNoDuplicatesWithinType(weekDayDTO);
         validateNoDuplicatesWithinType(holiDayDTO);
@@ -38,12 +39,22 @@ public class NamesValidator {
         }
     }
 
-    private static void validateMaxTotalMembers(EmergencyDutyDTO weekDayDTO, EmergencyDutyDTO holiDayDTO) {
-        int totalMembers = weekDayDTO.nicknames().size() + holiDayDTO.nicknames().size();
+    private static void validateWeekdayMembers(EmergencyDutyDTO weekDayDTO) {
+        int totalMembers = weekDayDTO.nicknames().size();
+
         if (totalMembers > MAX_TOTAL_MEMBERS) {
             throw new IllegalArgumentException("총 근무 인원은 최대 35명을 넘을 수 없습니다.");
         }
     }
+
+    private static void validateMaxHolidayMembers(EmergencyDutyDTO holidayDTO) {
+        int totalMembers = holidayDTO.nicknames().size();
+
+        if (totalMembers > MAX_TOTAL_MEMBERS) {
+            throw new IllegalArgumentException("총 근무 인원은 최대 35명을 넘을 수 없습니다.");
+        }
+    }
+
 
     private static void validateNoDuplicatesWithinType(EmergencyDutyDTO dto) {
         Set<String> namesSet = new HashSet<>();

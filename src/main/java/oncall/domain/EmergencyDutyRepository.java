@@ -7,7 +7,7 @@ import java.util.List;
 public class EmergencyDutyRepository {
 
     private static final EmergencyDutyRepository instance = new EmergencyDutyRepository();
-    private List<EmergencyDuty> assignedDuties;
+    private final List<EmergencyDuty> assignedDuties;
 
     private EmergencyDutyRepository() {
         assignedDuties = new ArrayList<>();

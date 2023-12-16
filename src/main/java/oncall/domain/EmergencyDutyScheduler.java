@@ -49,4 +49,9 @@ public class EmergencyDutyScheduler {
     private static boolean isWeekend(DayOfWeek dayOfWeek) {
         return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
+
+    public static boolean isPublicHoliday(LocalDate date) {
+        MonthDay monthDay = MonthDay.from(date);
+        return holidays.contains(monthDay);
+    }
 }

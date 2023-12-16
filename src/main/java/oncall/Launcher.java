@@ -1,11 +1,14 @@
 package oncall;
 
+import java.util.List;
 import oncall.controller.AssignDutyController;
 import oncall.controller.InputController;
+import oncall.domain.EmergencyDuty;
 import oncall.domain.EmergencyDutyRepository;
 import oncall.domain.EmergencyDutyScheduler;
 import oncall.dto.EmergencyDudyDTOs;
 import oncall.dto.MonthDayDTO;
+import oncall.view.OutputView;
 import oncall.vo.Days;
 
 public class Launcher {
@@ -22,6 +25,10 @@ public class Launcher {
         AssignDutyController assignDutyController = new AssignDutyController(emergencyDudyDTOs);
         assignDutyController.assign(monthDays);
 
-        System.out.println(EmergencyDutyRepository.getInstance().getAssignedDuties());
+        EmergencyDutyRepository emergencyDutyRepository = EmergencyDutyRepository.getInstance();
+
+        List<EmergencyDuty> emergencyDuties = emergencyDutyRepository.getAssignedDuties();
+
+        OutputView.printResult(monthDays, emergencyDuties);
     }
 }
