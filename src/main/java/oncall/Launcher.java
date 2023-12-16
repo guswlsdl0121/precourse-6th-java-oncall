@@ -30,5 +30,7 @@ public class Launcher {
         List<EmergencyDuty> emergencyDuties = emergencyDutyRepository.getAssignedDuties();
 
         OutputView.printResult(monthDays, emergencyDuties);
+
+        emergencyDutyRepository.clearDuties();
     }
 }
