@@ -76,10 +76,18 @@ public class AssignDutyController {
 
 
     private Deque<String> getCrewDeque(boolean isHoliday) {
-        return isHoliday ? holidayCrew : weekdayCrew;
+        if (isHoliday) {
+            return holidayCrew;
+        }
+        return weekdayCrew;
     }
 
+
     private Deque<String> getOppositeCrewDeque(boolean isHoliday) {
-        return isHoliday ? weekdayCrew : holidayCrew;
+        if (isHoliday) {
+            return weekdayCrew;
+        }
+        return holidayCrew;
     }
+
 }
